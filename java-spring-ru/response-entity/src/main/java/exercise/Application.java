@@ -1,6 +1,7 @@
 package exercise;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,15 +32,15 @@ public class Application {
     }
 
     @GetMapping("/posts") // Список страниц
-    public ResponseEntity<List<Post>> index(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer limit) {
-        List<Post> postsToResponse = posts.stream().skip((long) (page - 1) * limit).limit(limit).toList();
+    public ResponseEntity<List<Post>> index() {
+        List<Post> postsToResponse = posts.stream().toList();
         return ResponseEntity.ok().header("X-Total-Count", String.valueOf(postsToResponse.size())).body(postsToResponse);
     }
 
     @PostMapping("/posts") // Создание страницы
-    public ResponseEntity<List<Post>> create(@RequestBody Post Post) {
+    public ResponseEntity<Post> create(@RequestBody Post Post) {
         posts.add(Post);
-        return ResponseEntity.created(URI.create("/posts/" + Post.getId())).body(posts);
+        return ResponseEntity.created(URI.create("/posts/" + Post.getId())).body(Post);
     }
 
     @GetMapping("/posts/{id}") // Вывод страницы
