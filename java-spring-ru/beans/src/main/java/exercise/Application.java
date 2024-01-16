@@ -23,6 +23,8 @@ public class Application {
     public Daytime daytime() {
         if (LocalDateTime.now().getHour() >= 10 && LocalDateTime.now().getHour() <= 22) {
             return new Day();
-        } else return new Night();
+        } else {
+            return new Night();
+        }
     }
 }
