@@ -21,7 +21,7 @@ public class Application {
     @Bean
     @Scope("prototype")
     public Daytime daytime() {
-        if (LocalDateTime.now().getHour() >= 10 && LocalDateTime.now().getHour() <= 22) {
+        if (LocalDateTime.now().getHour() >= 6 && LocalDateTime.now().getHour() <= 22) {
             return new Day();
         } else {
             return new Night();
